@@ -35,21 +35,47 @@ const RegistrationForm: React.FC<Props> = ({ preSelectedSessionId }) => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.selectedSessions.length === 0) {
-      alert("請至少選擇一個梯次");
-      return;
-    }
-    
-    setStatus(RegistrationStatus.SUBMITTING);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (formData.selectedSessions.length === 0) {
+    alert('請至少選擇一個梯次');
+    return;
+  }
 
-    // Simulate API call
-    setTimeout(() => {
-      setStatus(RegistrationStatus.SUCCESS);
-      console.log('Submitted Data:', formData);
-    }, 1500);
-  };
+  setStatus(RegistrationStatus.SUBMITTING);
+
+  const selectedSessionDetails = CAMP_SESSIONS.filter(s =>
+    formData.selectedSessions.includes(s.id)
+  );
+  const totalAmount = selectedSessionDetails.reduce((sum, s) => sum + s.price, 0);
+
+  try {
+    await fetch(
+      'https://script.google.com/macros/s/AKfycbwOTrJLDwlH61DMYeLV11bdjznzk0hAhbrdPvE9h2PoXQK5O-TSgyTI6B32rZgLPuc1/exec',
+      {
+        method: 'POST',
+        mode: 'no-cors', // ⭐ 避開 CORS / preflight
+        headers: {
+          // 用 text/plain 就不會觸發預檢，GAS 一樣可以讀 e.postData.contents
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify({
+          ...formData,
+          selectedSessionDetails,
+          totalAmount,
+        }),
+      }
+    );
+
+    // no-cors 看不到 response，但請求只要沒丟 exception，我們就當成功
+    setStatus(RegistrationStatus.SUCCESS);
+  } catch (err) {
+    console.error(err);
+    setStatus(RegistrationStatus.IDLE);
+    alert('送出失敗，請稍後再試，或透過官方 LINE 聯絡我們 🙏');
+  }
+};
+
 
   if (status === RegistrationStatus.SUCCESS) {
     return (
