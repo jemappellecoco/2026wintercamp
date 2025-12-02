@@ -114,7 +114,7 @@ function App() {
               <Phone className="w-4 h-4" /> 03-123-4567
             </div>
             <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4" /> contact@stonebooks.com.tw
+              <Mail className="w-4 h-4" /> stone.education.tw@gmail.com
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4" /> {GENERAL_INFO.location}
