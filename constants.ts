@@ -6,7 +6,7 @@ export const CAMP_SESSIONS: CampSession[] = [
     title: '第一梯次：英語故事創作 × 停格動畫導演營',
     subtitle: '由廣受歡迎的 Joanne 老師親自帶領，激發孩子的無限想像力！',
     date: '1/26 (一) ~ 1/30 (五)',
-    price: 9000,
+    price: 9200,
     description: '結合「故事創作 × 動畫拍攝」，從腳本到鏡頭，親手製作屬於自己的動畫短片！',
     highlights: [
       '每日上午由 Joanne 老師進行全英文故事引導與寫作教學',
@@ -15,13 +15,16 @@ export const CAMP_SESSIONS: CampSession[] = [
     colorTheme: 'orange',
     image: 'https://picsum.photos/800/500?random=10',
     schedule: [
-      { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '戶外教學\n(包車前往)' },
-      { time: '10:00-10:50', mon: 'Joanne 老師\n說故事時間', tue: 'Joanne 老師\n說故事時間', wed: 'Joanne 老師\n說故事時間', thu: 'Joanne 老師\n說故事時間', fri: '六福村主題樂園' },
-      { time: '11:00-11:50', mon: '寫作業', tue: '寫作課', wed: '基礎文法', thu: '寫作課', fri: '六福村主題樂園' },
-      { time: '12:00-13:00', mon: '午休時間', tue: '午休時間', wed: '午休時間', thu: '午休時間', fri: '一日遊' },
-      { time: '13:00-14:30', mon: '認識動畫片：\n動畫原理', tue: '動畫劇本寫作', wed: '動畫人物與\n背景素材製作', thu: 'Filming Time\n錄製停格動畫', fri: '尋找靈感' },
-      { time: '14:30-15:30', mon: '認識動畫片：\n動畫原理', tue: '動畫劇本寫作', wed: '動畫背景\n素材製作', thu: 'Filming Time\n錄製停格動畫', fri: '攝影挑戰' },
-      { time: '15:30-16:00', mon: 'Switch Party', tue: 'Board Game', wed: 'Switch Party', thu: 'Party Time', fri: '快樂賦歸' },
+      { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '戶外教學 \n 六福村 \n(包車前往)' },
+      { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '六福村主題樂園' },
+      { time: '10:00-10:50', mon: 'Joanne 老師\n說故事時間', tue: 'Joanne 老師\n說故事時間', wed: 'Joanne 老師\n說故事時間', thu: 'Joanne 老師\n說故事時間', fri: '戶外教學' },
+      { time: '11:00~11:50', mon: '寫作課', tue: '寫作課', wed: '故事配音', thu: '故事配音', fri: '藝術探索' },
+      { time: '12:00~13:00', mon: '午休時間', tue: '午休時間', wed: '午休時間', thu: '莎午休時間', fri: '戶外教學' },
+      { time: '13:00-14:30', mon: '認識動畫片\n動畫是怎麼拍出來的', tue: '動畫人物與\n背景素材製作', wed: '動畫人物與\n背景素材製作', thu: 'Filming Time\n錄製你的停格動畫', fri: '快樂賦歸' },
+      { time: '14:30-15:30', mon: '認識動畫片\n動畫是怎麼拍出來的', tue: '故事配音', wed: '動畫背景素材製作', thu: 'Filming Time\n錄製你的停格動畫', fri: '快樂賦歸' },
+      { time: '15:30-16:00', mon: 'Switch Party', tue: 'Board Game', wed: 'Switch Party', thu: 'Board Game', fri: '快樂賦歸' },
+      { time: '16:00-16:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '接送時間' },
+
     ]
   },
   {
@@ -29,7 +32,7 @@ export const CAMP_SESSIONS: CampSession[] = [
     title: '第二梯次：遨遊世界一萬哩：歐洲文化與旅遊英語',
     subtitle: '不出國也能環遊歐洲！沉浸式英語情境與跨文化手作體驗。',
     date: '2/2 (一) ~ 2/6 (五)',
-    price: 8000,
+    price: 8350,
     description: '每日解鎖一個歐洲國家，搭配實用旅遊英語與各國特色手作 DIY。',
     highlights: [
       '包含西班牙文體驗',
@@ -40,12 +43,15 @@ export const CAMP_SESSIONS: CampSession[] = [
     colorTheme: 'sky',
     image: 'https://picsum.photos/800/500?random=20',
     schedule: [
-      { time: '09:30-10:00', mon: '課堂規則/破冰', tue: '破冰遊戲', wed: '破冰遊戲', thu: '破冰遊戲', fri: '破冰遊戲' },
-      { time: '10:00-10:50', mon: '旅遊英語\n機場報到登機', tue: '旅遊英語\n安檢與過海關', wed: '旅遊英語\n機上注意事項', thu: '旅遊英語\n免稅商店購物', fri: '戶外教學' },
-      { time: '11:00-11:50', mon: '熱情西班牙\n探索歐洲', tue: '浪漫法蘭西\n探索歐洲', wed: '務實德意志\n探索歐洲', thu: '古典英格蘭\n探索歐洲', fri: '青埔兒童美術館' },
-      { time: '12:00-13:30', mon: '午餐與休息', tue: '午餐與休息', wed: '午餐與休息', thu: '午餐與休息', fri: '藝術探索' },
-      { time: '13:30-15:30', mon: '西班牙文\n小教室', tue: '手做檸檬肥皂\n(法國檸檬節)', wed: '手做小汽車\n(德國汽車文化)', thu: '莎士比亞戲劇\n(英國文學寶藏)', fri: '戶外教學' },
-      { time: '15:30-16:00', mon: 'Switch Party', tue: 'Board Game', wed: 'Switch Party', thu: 'Acting Time', fri: '快樂賦歸' },
+       { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '戶外教學 \n 六福村 \n(包車前往)' },
+      { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '六福村主題樂園' },
+      { time: '10:00-10:50', mon: '旅遊英文\n報到登機', tue: '旅遊英文\n安全檢查過海關', wed: '旅遊英文\n機上注意事項', thu: '旅遊英文\n免稅商店購物', fri: '戶外教學' },
+      { time: '11:00~11:50', mon: '探索歐洲\n熱情西班牙', tue: '探索歐洲\n浪漫法蘭西', wed: '探索歐洲\n務實德意志', thu: '探索歐洲\n古典英格蘭', fri: '藝術探索' },
+      { time: '11:50-13:30', mon: '午休時間', tue: '午休時間', wed: '午休時間', thu: '莎午休時間', fri: '戶外教學' },
+      { time: '13:00-15:30', mon: '西班牙文小教室', tue: '法國檸檬節\n手做檸檬肥皂', wed: '驅動世界的力量\n德國汽車文化介紹\n(手做小汽車)', thu: '英國文學寶藏\n莎士比亞戲劇課', fri: '快樂賦歸' },
+      { time: '15:30-16:00', mon: 'Switch Party ', tue: 'Board Game', wed: 'Switch Party', thu: 'Acting Time', fri: '快樂賦歸' },
+      { time: '16:00-16:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '接送時間' },
+
     ]
   },
   {
@@ -53,7 +59,7 @@ export const CAMP_SESSIONS: CampSession[] = [
     title: '第三梯次：穿越時空：西洋燦爛古文明探索',
     subtitle: '歷史 × 科學 × 藝術！動手玩出古人的大智慧。',
     date: '2/9 (一) ~ 2/13 (五)',
-    price: 8000,
+    price: 8350,
     description: '探索埃及、希臘、羅馬與兩河文明，透過 STEAM 實作（如投石器、造紙）體驗歷史。',
     highlights: [
       '豐富的實作課程（莎草紙、投石器、羅馬火炬）',
@@ -62,12 +68,15 @@ export const CAMP_SESSIONS: CampSession[] = [
     colorTheme: 'emerald',
     image: 'https://picsum.photos/800/500?random=30',
     schedule: [
-      { time: '09:30-10:00', mon: '課堂規則/破冰', tue: '破冰遊戲', wed: '破冰遊戲', thu: '破冰遊戲', fri: '戶外教學\n(包車前往)' },
-      { time: '10:00-10:50', mon: '金字塔解謎', tue: '奧運的起源', wed: '希臘奧林匹克', thu: '輝煌羅馬帝國', fri: '(包車前往)' },
-      { time: '11:00-11:50', mon: '輝煌古埃及文明', tue: '希臘哲學與數學', wed: '帝國文明與藝術', thu: '兩河古文明', fri: '六福村主題樂園' },
-      { time: '12:00-13:30', mon: '午餐與休息', tue: '午餐與休息', wed: '午餐與休息', thu: '午餐與休息', fri: '歡樂一日遊' },
-      { time: '13:30-15:30', mon: '莎草紙筆記本\n手工製作', tue: '投石器製作\n揭密建築學', wed: '羅馬火炬與桂冠\n手做時間', thu: '楔形文字\n練習與體驗', fri: '戶外教學' },
-      { time: '15:30-16:00', mon: 'Switch Party', tue: 'Racing Time', wed: '投石器大戰', thu: 'Board Game', fri: '快樂賦歸' },
+       { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '台北科博館\n或兒童新樂園' },
+      { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '六福村主題樂園' },
+      { time: '10:00-10:50', mon: '金字塔解謎', tue: '奧運的起源\n希臘奧林匹克運動會', wed: '輝煌的羅馬帝國', thu: '世界最古老的文明\n兩河古文明', fri: '戶外教學' },
+      { time: '11:00~11:50', mon: '認識輝煌\n古埃及文明', tue: '希臘哲學與數學', wed: '帝國的文明與藝術', thu: '古人的智慧\n曆法制度', fri: '藝術探索' },
+      { time: '11:50-13:30', mon: '午休時間', tue: '午休時間', wed: '午休時間', thu: '莎午休時間', fri: '戶外教學' },
+      { time: '13:00-15:30', mon: '莎草紙筆記本製作', tue: '揭密建築學\n投石器製作', wed: '手做時間\n羅馬火炬與桂冠', thu: '文字的力量\n楔形文字練習寫', fri: '快樂賦歸' },
+      { time: '15:30-16:00', mon: 'Switch Party ', tue: 'Racing Time\n投石器大戰', wed: 'Board game', thu: 'Switch Party ', fri: '快樂賦歸' },
+      { time: '16:00-16:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '接送時間' },
+
     ]
   }
 ];
