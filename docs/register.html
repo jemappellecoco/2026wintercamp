@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <title>冬令營報名表 Registration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Tailwind CDN（和 wintercamp 一樣做法） -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-slate-950 text-slate-100">
@@ -17,44 +15,39 @@
       請完整填寫以下資料，送出後將寄送報名確認信至您的 Email。
     </p>
 
-    <!-- 成功訊息（如果之後改成 AJAX 可以用） -->
-    <div id="successMsg"
-         class="hidden mb-4 rounded-lg bg-emerald-600/20 border border-emerald-500 px-4 py-3 text-sm text-emerald-100">
-      ✅ 報名已送出，我們已收到您的資料，確認信將寄送至您填寫的 Email。
-    </div>
-
-    <!-- 錯誤訊息 -->
+    <!-- 錯誤訊息（之後如果要顯示可用） -->
     <div id="errorMsg"
          class="hidden mb-4 rounded-lg bg-rose-600/20 border border-rose-500 px-4 py-3 text-sm text-rose-100">
       ⚠ 送出時發生問題，請稍後再試，或聯繫主辦單位。
     </div>
-<!-- 報名成功畫面 -->
-<div id="successView"
-     class="hidden mt-6 text-center bg-white rounded-3xl px-6 py-10 shadow-xl">
 
-  <div class="mx-auto mb-4 h-20 w-20 rounded-full bg-emerald-100 flex items-center justify-center">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  </div>
+    <!-- 報名成功畫面 -->
+    <div id="successView"
+         class="hidden mt-6 text-center bg-white rounded-3xl px-6 py-10 shadow-xl">
 
-  <h2 class="text-2xl font-bold text-slate-800 mb-2">報名成功！</h2>
+      <div class="mx-auto mb-4 h-20 w-20 rounded-full bg-emerald-100 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
 
-  <p class="text-sm text-slate-600 leading-relaxed mb-6">
-    感謝您的報名，我們會盡快透過 Email 與您聯繫後續繳費事宜。<br>
-    請記得查看信箱或垃圾郵件匣。
-  </p>
+      <h2 class="text-2xl font-bold text-slate-800 mb-2">報名成功！</h2>
 
-  <button id="nextBtn"
-          class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm font-semibold shadow-md hover:opacity-95">
-    填寫下一位
-  </button>
+      <p class="text-sm text-slate-600 leading-relaxed mb-6">
+        感謝您的報名，我們會盡快透過 Email 與您聯繫後續繳費事宜。<br>
+        請記得查看信箱或垃圾郵件匣。
+      </p>
 
-  <p class="text-xs text-slate-500 mt-6">
-    匯款帳號將於報名成功後發送至您的信箱。<br>
-    如有任何疑問，歡迎聯繫我們。
-  </p>
-</div>
+      <button id="nextBtn"
+              class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm font-semibold shadow-md hover:opacity-95">
+        填寫下一位
+      </button>
+
+      <p class="text-xs text-slate-500 mt-6">
+        匯款帳號將於報名成功後發送至您的信箱。<br>
+        如有任何疑問，歡迎聯繫我們。
+      </p>
+    </div>
 
     <!-- 報名表單 -->
     <form id="regForm"
@@ -78,15 +71,43 @@
 
           <div>
             <label class="block text-sm mb-1">身分證字號（必填，用於保險）</label>
-            <input type="text" name="idNumber" required
+            <input type="text" id="idNumber" name="idNumber" required
                    class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" />
+            <p id="idHint" class="mt-1 text-xs text-slate-400">
+              請輸入身分證字號（首字大寫英文字母，第二碼 1 或 2）。
+            </p>
           </div>
 
-          <div>
+          <!-- 出生年月日：年 / 月 / 日下拉 -->
+          <div class="md:col-span-2">
             <label class="block text-sm mb-1">出生年月日（必填）</label>
-            <input type="text" name="birthday" placeholder="例如：2012/03/15"
-                   required
-                   class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" />
+            <div class="flex gap-2">
+              <select id="birthdayYear" class="flex-1 rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" required>
+                <option value="">年</option>
+                <!-- 年份用 JS 產生 -->
+              </select>
+              <select id="birthdayMonth" class="w-24 rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" required>
+                <option value="">月</option>
+                <option value="1">1 月</option>
+                <option value="2">2 月</option>
+                <option value="3">3 月</option>
+                <option value="4">4 月</option>
+                <option value="5">5 月</option>
+                <option value="6">6 月</option>
+                <option value="7">7 月</option>
+                <option value="8">8 月</option>
+                <option value="9">9 月</option>
+                <option value="10">10 月</option>
+                <option value="11">11 月</option>
+                <option value="12">12 月</option>
+              </select>
+              <select id="birthdayDay" class="w-24 rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" required>
+                <option value="">日</option>
+                <!-- 日數用 JS 依月份更新 -->
+              </select>
+            </div>
+            <!-- 真正送出到後端的欄位 -->
+            <input type="hidden" id="birthdayHidden" name="birthday" />
           </div>
 
           <div>
@@ -100,16 +121,36 @@
             </select>
           </div>
 
+          <!-- 學校名稱 -->
           <div>
-            <label class="block text-sm mb-1">學校／年級（必填）</label>
-            <input type="text" name="schoolGrade" required
+            <label class="block text-sm mb-1">學校名稱（必填）</label>
+            <input type="text" name="schoolName" required
                    class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" />
+          </div>
+
+          <!-- 年級下拉：國小一～國三 -->
+          <div>
+            <label class="block text-sm mb-1">年級（必填）</label>
+            <select name="grade" required
+                    class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm">
+              <option value="">請選擇年級</option>
+              <option value="國小一年級">國小一年級</option>
+              <option value="國小二年級">國小二年級</option>
+              <option value="國小三年級">國小三年級</option>
+              <option value="國小四年級">國小四年級</option>
+              <option value="國小五年級">國小五年級</option>
+              <option value="國小六年級">國小六年級</option>
+              <option value="國中一年級">國中一年級</option>
+              <option value="國中二年級">國中二年級</option>
+              <option value="國中三年級">國中三年級</option>
+            </select>
           </div>
 
           <div>
             <label class="block text-sm mb-1">聯絡電話（手機，必填）</label>
-            <input type="tel" name="phone" required
-                   class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" />
+            <input type="tel" id="phone" name="phone" required
+                   class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm"
+                   placeholder="例如：0912345678" />
           </div>
 
           <div class="md:col-span-2">
@@ -121,7 +162,7 @@
         </div>
       </section>
 
-      <!-- 一之二、 選擇報名梯次 -->
+      <!-- 二、選擇報名梯次 -->
       <section>
         <h2 class="text-xl font-semibold mb-3">二、選擇報名梯次 <span class="text-rose-500">*</span></h2>
         <p class="text-xs text-slate-400 mb-3">
@@ -292,103 +333,213 @@
     </form>
   </div>
 
-<script>
-  const form = document.getElementById('regForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const loadingText = document.getElementById('loadingText');
-  const agree = document.getElementById('agreeTerms');
+  <script>
+    const form = document.getElementById('regForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingText = document.getElementById('loadingText');
+    const agree = document.getElementById('agreeTerms');
 
-  const successView = document.getElementById('successView');
-  const nextBtn = document.getElementById('nextBtn');
+    const successView = document.getElementById('successView');
+    const nextBtn = document.getElementById('nextBtn');
 
-  const sessionCheckboxes = Array.from(document.querySelectorAll('input[name="sessions"]'));
-  const totalPriceText = document.getElementById('totalPriceText');
-  const totalPriceInput = document.getElementById('totalPriceInput');
+    const sessionCheckboxes = Array.from(document.querySelectorAll('input[name="sessions"]'));
+    const totalPriceText = document.getElementById('totalPriceText');
+    const totalPriceInput = document.getElementById('totalPriceInput');
 
-  // 🚀 這裡改成你的 Apps Script URL
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUAD110dckyhjTintxyJBJf6QxwtLp8S7tEKmck28D7eTtdBUrtH8tZgSWKIh8f_NO/exec';
-  // 每個梯次的價錢（前端顯示用，後端還是會再算一次）
-  const SESSION_PRICES = {
-    S1: 9200,
-    S2: 8350,
-    S3: 8350
-  };
+    const birthdayYear = document.getElementById('birthdayYear');
+    const birthdayMonth = document.getElementById('birthdayMonth');
+    const birthdayDay = document.getElementById('birthdayDay');
+    const birthdayHidden = document.getElementById('birthdayHidden');
 
-  function updateTotalPrice() {
-    let total = 0;
-    sessionCheckboxes.forEach(cb => {
-      if (cb.checked) {
-        total += SESSION_PRICES[cb.value] || 0;
+    const idInput = document.getElementById('idNumber');
+    const idHint = document.getElementById('idHint');
+    const phoneInput = document.getElementById('phone');
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUAD110dckyhjTintxyJBJf6QxwtLp8S7tEKmck28D7eTtdBUrtH8tZgSWKIh8f_NO/exec';
+
+    // 每個梯次的價錢
+    const SESSION_PRICES = { S1: 9200, S2: 8350, S3: 8350 };
+
+    // === 生日：生成年份（大約 2005~2018，可依需要調整） ===
+    (function fillYears() {
+      const thisYear = new Date().getFullYear();
+      const start = thisYear - 20;  // 最早年份
+      const end = thisYear - 5;     // 最晚年份（國中生左右）
+      for (let y = end; y >= start; y--) {
+        const opt = document.createElement('option');
+        opt.value = String(y);
+        opt.textContent = y + ' 年';
+        birthdayYear.appendChild(opt);
+      }
+    })();
+
+    // 根據年/月更新日數
+    function updateDays() {
+      const y = parseInt(birthdayYear.value, 10);
+      const m = parseInt(birthdayMonth.value, 10);
+
+      birthdayDay.innerHTML = '<option value="">日</option>';
+      if (!y || !m) return;
+
+      const daysInMonth = new Date(y, m, 0).getDate();
+      for (let d = 1; d <= daysInMonth; d++) {
+        const opt = document.createElement('option');
+        opt.value = String(d);
+        opt.textContent = d + ' 日';
+        birthdayDay.appendChild(opt);
+      }
+    }
+    birthdayYear.addEventListener('change', updateDays);
+    birthdayMonth.addEventListener('change', updateDays);
+
+    // 總價更新
+    function updateTotalPrice() {
+      let total = 0;
+      sessionCheckboxes.forEach(cb => {
+        if (cb.checked) total += SESSION_PRICES[cb.value] || 0;
+      });
+      totalPriceText.textContent = total > 0 ? `NT$ ${total.toLocaleString()}` : '尚未選擇梯次';
+      totalPriceInput.value = total;
+    }
+    sessionCheckboxes.forEach(cb => cb.addEventListener('change', updateTotalPrice));
+    updateTotalPrice();
+
+    // 中華民國身分證檢查
+    function isValidTWId(id) {
+      id = id.trim().toUpperCase();
+      if (!/^[A-Z][12]\d{8}$/.test(id)) return false;
+
+      const map = {
+        A:10,B:11,C:12,D:13,E:14,F:15,G:16,H:17,I:34,J:18,K:19,L:20,
+        M:21,N:22,O:35,P:23,Q:24,R:25,S:26,T:27,U:28,V:29,W:32,X:30,Y:31,Z:33
+      };
+      const code = map[id[0]];
+      if (!code) return false;
+
+      const n1 = Math.floor(code / 10);
+      const n2 = code % 10;
+      const nums = [n1, n2].concat(id.slice(1).split('').map(ch => parseInt(ch, 10)));
+
+      const weights = [1,9,8,7,6,5,4,3,2,1,1];
+      const sum = nums.reduce((acc, n, i) => acc + n * weights[i], 0);
+      return sum % 10 === 0;
+    }
+
+    // 即時更新身分證提示
+    function updateIdHint() {
+      const value = idInput.value.trim().toUpperCase();
+
+      if (!value) {
+        idHint.textContent = '請輸入身分證字號（首字大寫英文字母，第二碼 1 或 2）。';
+        idHint.className = 'mt-1 text-xs text-slate-400';
+        idInput.classList.remove('ring-1', 'ring-red-500', 'ring-emerald-500');
+        return;
+      }
+
+      if (isValidTWId(value)) {
+        idHint.textContent = '✅ 身分證字號格式正確。';
+        idHint.className = 'mt-1 text-xs text-emerald-400';
+        idInput.classList.add('ring-1', 'ring-emerald-500');
+        idInput.classList.remove('ring-red-500');
+      } else {
+        idHint.textContent = '❗ 似乎有錯，請再次確認英文字母、性別碼與數字。';
+        idHint.className = 'mt-1 text-xs text-rose-400';
+        idInput.classList.add('ring-1', 'ring-red-500');
+        idInput.classList.remove('ring-emerald-500');
+      }
+    }
+
+    idInput.addEventListener('input', () => {
+      idInput.value = idInput.value.toUpperCase();
+      updateIdHint();
+    });
+    updateIdHint(); // 初始化一次
+
+    // 手機 10 碼，必須 09 開頭
+    function isValidPhone(phone) {
+      return /^09\d{8}$/.test(phone.trim());
+    }
+
+    // 表單送出
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // 至少要選一個梯次
+      if (!sessionCheckboxes.some(cb => cb.checked)) {
+        alert('請至少選擇一個報名梯次。');
+        return;
+      }
+
+      // 同意條款
+      if (!agree.checked) {
+        alert('請先勾選「我已閱讀並同意相關條款」再送出報名。');
+        return;
+      }
+
+      // 生日組合與檢查
+      const y = birthdayYear.value;
+      const m = birthdayMonth.value;
+      const d = birthdayDay.value;
+      if (!y || !m || !d) {
+        alert('請完整選擇出生的年、月、日。');
+        return;
+      }
+      const date = new Date(parseInt(y,10), parseInt(m,10)-1, parseInt(d,10));
+      if (date.getFullYear() != y || (date.getMonth()+1) != m || date.getDate() != d) {
+        alert('請確認出生日期是否正確。');
+        return;
+      }
+      birthdayHidden.value = `${y}/${String(m).padStart(2,'0')}/${String(d).padStart(2,'0')}`;
+
+      // 身分證檢查（再防呆一次）
+      if (!isValidTWId(idInput.value)) {
+        alert('身分證字號格式或檢查碼不正確，請再次確認。');
+        return;
+      }
+
+      // 手機檢查
+      if (!isValidPhone(phoneInput.value)) {
+        alert('手機號碼需為 09 開頭的 10 位數字（例如：0912345678）。');
+        return;
+      }
+
+      // 顯示送出中
+      submitBtn.disabled = true;
+      loadingText.classList.remove('hidden');
+
+      try {
+        const formData = new FormData(form);
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        });
+
+        // 成功：清空 & 顯示成功畫面
+        form.reset();
+        sessionCheckboxes.forEach(cb => (cb.checked = false));
+        updateTotalPrice();
+        successView.classList.remove('hidden');
+        form.classList.add('hidden');
+
+      } catch (err) {
+        console.error(err);
+        alert('送出時發生問題，請稍後再試一次或聯繫我們。');
+      } finally {
+        submitBtn.disabled = false;
+        loadingText.classList.add('hidden');
       }
     });
 
-    if (total > 0) {
-      totalPriceText.textContent = `NT$ ${total.toLocaleString()}`;
-    } else {
-      totalPriceText.textContent = '尚未選擇梯次';
-    }
-    totalPriceInput.value = total;
-  }
-
-  sessionCheckboxes.forEach(cb => cb.addEventListener('change', updateTotalPrice));
-  updateTotalPrice();
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault(); // ❗ 阻止原本的表單跳轉
-
-    // 至少要選一個梯次
-    const anySelected = sessionCheckboxes.some(cb => cb.checked);
-    if (!anySelected) {
-      alert('請至少選擇一個報名梯次。');
-      return;
-    }
-
-    // 同意條款檢查
-    if (!agree.checked) {
-      alert('請先勾選「我已閱讀並同意相關條款」再送出報名。');
-      return;
-    }
-
-    // 顯示送出中 UI
-    submitBtn.disabled = true;
-    loadingText.classList.remove('hidden');
-
-    try {
-      const formData = new FormData(form);
-
-      // 用 fetch 把資料送到 Apps Script
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors' // 不讀回應，只要送出去成功就好
-      });
-
-      // 清空表單內容（避免下一位有殘留）
+    // 填寫下一位
+    nextBtn.addEventListener('click', () => {
+      successView.classList.add('hidden');
+      form.classList.remove('hidden');
       form.reset();
       sessionCheckboxes.forEach(cb => (cb.checked = false));
       updateTotalPrice();
-
-      // 顯示成功畫面，隱藏表單
-      form.classList.add('hidden');
-      successView.classList.remove('hidden');
-
-    } catch (err) {
-      console.error(err);
-      alert('送出時發生問題，請稍後再試一次或聯繫我們。');
-    } finally {
-      submitBtn.disabled = false;
-      loadingText.classList.add('hidden');
-    }
-  });
-
-  // 「填寫下一位」：關掉成功畫面，重新顯示空白表單
-  nextBtn.addEventListener('click', () => {
-    successView.classList.add('hidden');
-    form.classList.remove('hidden');
-    submitBtn.disabled = false;
-    loadingText.classList.add('hidden');
-  });
-</script>
-
+      updateIdHint();
+    });
+  </script>
 </body>
 </html>
