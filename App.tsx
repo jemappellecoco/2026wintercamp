@@ -34,12 +34,12 @@ function App() {
             在沉浸式雙語環境中，開啟跨領域的學習之旅。
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button 
-              onClick={() => scrollToForm()}
-              className="px-8 py-4 bg-white text-indigo-900 font-bold rounded-full shadow-xl hover:bg-gray-100 transition-all transform hover:-translate-y-1"
-            >
-              立即報名
-            </button>
+            <a
+  href="register.html"
+  className="px-8 py-4 bg-white text-indigo-900 font-bold rounded-full shadow-xl hover:bg-gray-100 transition-all transform hover:-translate-y-1"
+>
+  立即報名
+</a>
             <a 
               href="#sessions"
               className="px-8 py-4 bg-indigo-700/50 text-white font-bold rounded-full border border-indigo-400/30 hover:bg-indigo-700 transition-all backdrop-blur-sm"
@@ -103,25 +103,7 @@ function App() {
         </div>
       </section>
 
-      {/* Registration Section */}
-      <section ref={formRef} className="py-20 bg-indigo-900 text-white relative overflow-hidden">
-        {/* Background Patterns */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-
-        <div className="container mx-auto px-4 max-w-4xl relative z-10">
-           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black mb-4">線上報名</h2>
-            <p className="text-indigo-200">名額有限，請盡早填寫資料預約席次</p>
-          </div>
-          
-          <RegistrationForm preSelectedSessionId={selectedSessionForForm} />
-          
-          <div className="mt-12 text-center text-indigo-300 text-sm">
-            <p className="mb-2">匯款帳號將於報名成功後發送至您的信箱</p>
-            <p>如有任何疑問，歡迎使用右下角 AI 小幫手查詢</p>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-12">
