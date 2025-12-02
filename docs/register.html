@@ -17,7 +17,7 @@
       請完整填寫以下資料，送出後將寄送報名確認信至您的 Email。
     </p>
 
-    <!-- 成功訊息 -->
+    <!-- 成功訊息（如果之後改成 AJAX 可以用） -->
     <div id="successMsg"
          class="hidden mb-4 rounded-lg bg-emerald-600/20 border border-emerald-500 px-4 py-3 text-sm text-emerald-100">
       ✅ 報名已送出，我們已收到您的資料，確認信將寄送至您填寫的 Email。
@@ -91,20 +91,102 @@
                    class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm"
                    placeholder="報到通知與行前資訊將寄至此信箱" />
           </div>
-
-          <div class="md:col-span-2">
-            <label class="block text-sm mb-1">報名梯次／活動項目（必填）</label>
-            <input type="text" name="session"
-                   placeholder="例如：2025 冬令營 第一期"
-                   required
-                   class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" />
-          </div>
         </div>
       </section>
 
-      <!-- 二、緊急聯絡＆特殊需求 -->
+      <!-- 一之二、 選擇報名梯次 -->
       <section>
-        <h2 class="text-xl font-semibold mb-3">二、 緊急聯絡與特殊需求</h2>
+        <h2 class="text-xl font-semibold mb-3">二、選擇報名梯次 <span class="text-rose-500">*</span></h2>
+        <p class="text-xs text-slate-400 mb-3">
+          可勾選一個或多個梯次，後端將依勾選項目自動計算總價。
+        </p>
+
+        <div class="space-y-3">
+          <!-- 第一梯次 -->
+          <label class="flex items-start gap-3 rounded-2xl bg-indigo-50 border border-indigo-100 px-4 py-3 shadow-sm">
+            <input
+              type="checkbox"
+              name="sessions"
+              value="S1"
+              class="mt-1 h-4 w-4 accent-indigo-500"
+            />
+            <div class="flex-1">
+              <div class="flex items-baseline justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900">
+                  第一梯次：英語故事創作 × 停格動畫導演營
+                </p>
+                <span class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-700">
+                  NT$ 9,200
+                </span>
+              </div>
+              <p class="mt-1 text-xs text-slate-600">
+                建議國小 3–6 年級 · 英語表達 × 劇本創作 × 停格動畫實作。
+              </p>
+            </div>
+          </label>
+
+          <!-- 第二梯次 -->
+          <label class="flex items-start gap-3 rounded-2xl bg-indigo-50 border border-indigo-100 px-4 py-3 shadow-sm">
+            <input
+              type="checkbox"
+              name="sessions"
+              value="S2"
+              class="mt-1 h-4 w-4 accent-indigo-500"
+            />
+            <div class="flex-1">
+              <div class="flex items-baseline justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900">
+                  第二梯次：遨遊世界一萬哩：歐洲文化與旅遊英語
+                </p>
+                <span class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-700">
+                  NT$ 8,350
+                </span>
+              </div>
+              <p class="mt-1 text-xs text-slate-600">
+                歐洲城市導覽 × 旅遊情境對話 × 文化小知識。
+              </p>
+            </div>
+          </label>
+
+          <!-- 第三梯次 -->
+          <label class="flex items-start gap-3 rounded-2xl bg-indigo-50 border border-indigo-100 px-4 py-3 shadow-sm">
+            <input
+              type="checkbox"
+              name="sessions"
+              value="S3"
+              class="mt-1 h-4 w-4 accent-indigo-500"
+            />
+            <div class="flex-1">
+              <div class="flex items-baseline justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900">
+                  第三梯次：穿越時空：西洋燦爛古文明探索
+                </p>
+                <span class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-700">
+                  NT$ 8,350
+                </span>
+              </div>
+              <p class="mt-1 text-xs text-slate-600">
+                古文明故事 × 歷史地理 × 英文閱讀與簡報表達。
+              </p>
+            </div>
+          </label>
+        </div>
+
+        <!-- 前端顯示總價＋傳給後端用的 hidden 欄位 -->
+        <div class="mt-4 flex items-center justify-between text-sm">
+          <p class="text-slate-300">
+            已選擇梯次預估總金額：
+            <span id="totalPriceText" class="font-semibold text-emerald-300">
+              尚未選擇梯次
+            </span>
+          </p>
+        </div>
+        <input type="hidden" name="totalPrice" id="totalPriceInput" value="0" />
+      </section>
+
+      <!-- 三、緊急聯絡＆特殊需求 -->
+      <section>
+        <h2 class="text-xl font-semibold mb-3">三、 緊急聯絡與特殊需求</h2>
 
         <div class="grid gap-4 md:grid-cols-2">
           <div>
@@ -143,9 +225,9 @@
         </div>
       </section>
 
-      <!-- 三、條款與同意 -->
+      <!-- 四、條款與同意 -->
       <section>
-        <h2 class="text-xl font-semibold mb-3">三、 同意條款</h2>
+        <h2 class="text-xl font-semibold mb-3">四、 同意條款</h2>
 
         <div class="space-y-2 text-xs leading-relaxed text-slate-300 max-h-52 overflow-y-auto border border-slate-700 rounded-lg p-3 bg-slate-900/80">
           <p>1. 本報名資料僅供營隊聯繫、分組、辦理團體保險及相關行政作業使用。</p>
@@ -191,8 +273,46 @@
     const errorMsg = document.getElementById('errorMsg');
     const agree = document.getElementById('agreeTerms');
 
-    // 保險一層：沒勾不能送
+    const sessionCheckboxes = Array.from(document.querySelectorAll('input[name="sessions"]'));
+    const totalPriceText = document.getElementById('totalPriceText');
+    const totalPriceInput = document.getElementById('totalPriceInput');
+
+    // 每個梯次的價錢（後端也會再算一次）
+    const SESSION_PRICES = {
+      S1: 9200,
+      S2: 8350,
+      S3: 8350
+    };
+
+    function updateTotalPrice() {
+      let total = 0;
+      sessionCheckboxes.forEach(cb => {
+        if (cb.checked) {
+          total += SESSION_PRICES[cb.value] || 0;
+        }
+      });
+
+      if (total > 0) {
+        totalPriceText.textContent = `NT$ ${total.toLocaleString()}`;
+      } else {
+        totalPriceText.textContent = '尚未選擇梯次';
+      }
+      totalPriceInput.value = total;
+    }
+
+    sessionCheckboxes.forEach(cb => cb.addEventListener('change', updateTotalPrice));
+    updateTotalPrice();
+
     form.addEventListener('submit', function (e) {
+      // 至少要選一個梯次
+      const anySelected = sessionCheckboxes.some(cb => cb.checked);
+      if (!anySelected) {
+        e.preventDefault();
+        alert('請至少選擇一個報名梯次。');
+        return;
+      }
+
+      // 同意條款檢查
       if (!agree.checked) {
         e.preventDefault();
         alert('請先勾選「我已閱讀並同意相關條款」再送出報名。');
@@ -204,12 +324,7 @@
       loadingText.classList.remove('hidden');
 
       // 這裡使用原生 form POST 到 Apps Script
-      // Apps Script 收到後會寄信＋寫入試算表
-      // （如果你有設定 redirect，可以導回感謝頁）
     });
-
-    // 如果你之後有做「感謝頁 redirect」，
-    // 可以不用用 JS 顯示 success，而是讓 Script redirect 到 /thankyou.html
   </script>
 </body>
 </html>
