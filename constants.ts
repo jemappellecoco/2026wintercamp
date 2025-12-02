@@ -82,8 +82,8 @@ export const CAMP_SESSIONS: CampSession[] = [
 ];
 
 export const GENERAL_INFO = {
-  time: '每日 09:30 - 16:00 (09:00 開始 Drop-off, 16:00-16:30 Pick-up)',
-  location: '點石書屋',
+  time: '每日 09:30 - 16:00\n (09:00 開始 Drop-off, 16:00-16:30 Pick-up)',
+  location: '點石書屋 ',
   address: '請洽詢點石書屋', 
-  discounts: '第一梯次 $9,00 | 第二、三梯次 $8,000',
+  discounts: '第一梯次 $9,200 | 第二、三梯次 $8,350',
 };

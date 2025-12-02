@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CampSession } from '../types';
 import ScheduleTable from './ScheduleTable';
-import { ChevronDown, ChevronUp, CheckCircle, Calendar, MapPin } from 'lucide-react';
+import { ChevronDown, ChevronUp, CheckCircle, Calendar } from 'lucide-react';
 
 interface CampCardProps {
   session: CampSession;
@@ -21,21 +21,43 @@ const CampCard: React.FC<CampCardProps> = ({ session, onRegister }) => {
   return (
     <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 transition-all hover:shadow-2xl mb-12">
       <div className="md:flex">
+        {/* 左側：圖片 / 影片 */}
         <div className="md:w-1/3 relative h-64 md:h-auto">
-          <img 
-            src={session.image} 
-            alt={session.title} 
-            className="w-full h-full object-cover"
-          />
+          {session.id === 'batch1' ? (
+            // ⭐ 第一梯次：改成 YouTube 影片
+            <div className="w-full h-full">
+              <div className="w-full h-full aspect-video md:aspect-auto rounded-xl overflow-hidden shadow-lg">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/hkIpsorMbwI"
+                  title={session.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          ) : (
+            // 其他梯次維持原本的圖片
+            <img
+              src={session.image}
+              alt={session.title}
+              className="w-full h-full object-cover"
+            />
+          )}
+
+          {/* 日期標籤一樣保留在角落 */}
           <div className="absolute top-0 left-0 bg-black/60 text-white px-4 py-2 rounded-br-lg backdrop-blur-sm">
             {session.date}
           </div>
         </div>
+
+        {/* 右側：文字內容 */}
         <div className="md:w-2/3 p-6 md:p-8 flex flex-col justify-between">
           <div>
             <h3 className={`text-2xl font-bold mb-2 ${themeClasses.text}`}>{session.title}</h3>
             <p className="text-gray-600 font-medium mb-4 italic">{session.subtitle}</p>
-            
+
             <p className="text-gray-700 mb-6 leading-relaxed">{session.description}</p>
 
             <div className="mb-6">
@@ -57,20 +79,22 @@ const CampCard: React.FC<CampCardProps> = ({ session, onRegister }) => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-100">
             <div className="text-center sm:text-left">
               <span className="block text-sm text-gray-500">費用</span>
-              <span className={`text-3xl font-bold ${themeClasses.text}`}>NT$ {session.price.toLocaleString()}</span>
+              <span className={`text-3xl font-bold ${themeClasses.text}`}>
+                NT$ {session.price.toLocaleString()}
+              </span>
             </div>
-            
+
             <div className="flex gap-3 w-full sm:w-auto">
-              <button 
+              <button
                 onClick={() => setShowSchedule(!showSchedule)}
                 className="flex-1 sm:flex-none flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors"
               >
                 {showSchedule ? '隱藏課表' : '查看課表'}
                 {showSchedule ? <ChevronUp className="ml-2 w-4 h-4" /> : <ChevronDown className="ml-2 w-4 h-4" />}
               </button>
-              
-              <button 
-                 onClick={() => { window.location.href = '/2025wintercamp/register.html'; }}
+
+              <button
+                onClick={() => { window.location.href = '/2025wintercamp/register.html'; }}
                 className={`flex-1 sm:flex-none px-6 py-3 rounded-lg text-white font-bold shadow-md transform active:scale-95 transition-all ${themeClasses.btn}`}
               >
                 立即報名
@@ -84,10 +108,10 @@ const CampCard: React.FC<CampCardProps> = ({ session, onRegister }) => {
       {showSchedule && (
         <div className={`p-4 md:p-8 border-t border-gray-100 ${themeClasses.bg} animate-fadeIn`}>
           <div className="flex items-center justify-between mb-4">
-             <h4 className="font-bold text-gray-800 text-lg flex items-center">
+            <h4 className="font-bold text-gray-800 text-lg flex items-center">
               <Calendar className="w-5 h-5 mr-2 opacity-70" />
               詳細課表
-             </h4>
+            </h4>
           </div>
           <ScheduleTable schedule={session.schedule} colorTheme={session.colorTheme} />
           <p className="text-xs text-right text-gray-500 mt-2">* 課表內容可能會依實際狀況微調</p>
