@@ -51,7 +51,7 @@
 
     <!-- 報名表單 -->
     <form id="regForm"
-          action="https://script.google.com/macros/s/AKfycbwUAD110dckyhjTintxyJBJf6QxwtLp8S7tEKmck28D7eTtdBUrtH8tZgSWKIh8f_NO/exec"
+          action="https://script.google.com/macros/s/AKfycbxMNun8rQgxxFhFr1Yz3IdclZd19boLljqrQu8XUMUfy8O5PmQVMPmqm472woElhdr0/exec"
           method="POST"
           class="space-y-6 bg-slate-900/70 border border-slate-700 rounded-2xl p-6 shadow-xl">
 
@@ -74,7 +74,7 @@
             <input type="text" id="idNumber" name="idNumber" required
                    class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" />
             <p id="idHint" class="mt-1 text-xs text-slate-400">
-              請輸入身分證字號（首字大寫英文字母，第二碼 1 或 2）。
+              請輸入身分證字號（首字大寫英文字母，第二碼 1 或 2，並與性別欄位一致）。
             </p>
           </div>
 
@@ -84,7 +84,6 @@
             <div class="flex gap-2">
               <select id="birthdayYear" class="flex-1 rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" required>
                 <option value="">年</option>
-                <!-- 年份用 JS 產生 -->
               </select>
               <select id="birthdayMonth" class="w-24 rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" required>
                 <option value="">月</option>
@@ -103,16 +102,14 @@
               </select>
               <select id="birthdayDay" class="w-24 rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" required>
                 <option value="">日</option>
-                <!-- 日數用 JS 依月份更新 -->
               </select>
             </div>
-            <!-- 真正送出到後端的欄位 -->
             <input type="hidden" id="birthdayHidden" name="birthday" />
           </div>
 
           <div>
             <label class="block text-sm mb-1">性別（必填）</label>
-            <select name="gender" required
+            <select id="gender" name="gender" required
                     class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm">
               <option value="">請選擇</option>
               <option value="男">男</option>
@@ -240,7 +237,6 @@
           </label>
         </div>
 
-        <!-- 前端顯示總價＋傳給後端用的 hidden 欄位 -->
         <div class="mt-4 flex items-center justify-between text-sm">
           <p class="text-slate-300">
             已選擇梯次預估總金額：
@@ -272,8 +268,9 @@
 
           <div>
             <label class="block text-sm mb-1">緊急聯絡人電話（必填）</label>
-            <input type="tel" name="emergencyPhone" required
-                   class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm" />
+            <input type="tel" id="emergencyPhone" name="emergencyPhone" required
+                   class="w-full rounded-lg bg-slate-800 border border-slate-600 px-3 py-2 text-sm"
+                   placeholder="例如：0912345678" />
           </div>
 
           <div>
@@ -318,7 +315,6 @@
         </p>
       </section>
 
-      <!-- 送出按鈕 -->
       <div class="pt-2 border-t border-slate-700 flex items-center gap-3">
         <button
           id="submitBtn"
@@ -354,17 +350,18 @@
     const idInput = document.getElementById('idNumber');
     const idHint = document.getElementById('idHint');
     const phoneInput = document.getElementById('phone');
+    const emergencyPhoneInput = document.getElementById('emergencyPhone');
+    const genderSelect = document.getElementById('gender');
 
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUAD110dckyhjTintxyJBJf6QxwtLp8S7tEKmck28D7eTtdBUrtH8tZgSWKIh8f_NO/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp1L25m4avkIVuSwwz-uDYtvZSgsaA4_0Hh8qxYJxBYz8PvrDeYd4MLDonV-hikHyN/exec';
 
-    // 每個梯次的價錢
     const SESSION_PRICES = { S1: 9200, S2: 8350, S3: 8350 };
 
-    // === 生日：生成年份（大約 2005~2018，可依需要調整） ===
+    // 生成年份
     (function fillYears() {
       const thisYear = new Date().getFullYear();
-      const start = thisYear - 20;  // 最早年份
-      const end = thisYear - 5;     // 最晚年份（國中生左右）
+      const start = thisYear - 20;
+      const end = thisYear - 5;
       for (let y = end; y >= start; y--) {
         const opt = document.createElement('option');
         opt.value = String(y);
@@ -373,7 +370,7 @@
       }
     })();
 
-    // 根據年/月更新日數
+    // 更新日數
     function updateDays() {
       const y = parseInt(birthdayYear.value, 10);
       const m = parseInt(birthdayMonth.value, 10);
@@ -392,7 +389,7 @@
     birthdayYear.addEventListener('change', updateDays);
     birthdayMonth.addEventListener('change', updateDays);
 
-    // 總價更新
+    // 總價
     function updateTotalPrice() {
       let total = 0;
       sessionCheckboxes.forEach(cb => {
@@ -404,7 +401,7 @@
     sessionCheckboxes.forEach(cb => cb.addEventListener('change', updateTotalPrice));
     updateTotalPrice();
 
-    // 中華民國身分證檢查
+    // 身分證基本檢查
     function isValidTWId(id) {
       id = id.trim().toUpperCase();
       if (!/^[A-Z][12]\d{8}$/.test(id)) return false;
@@ -419,64 +416,88 @@
       const n1 = Math.floor(code / 10);
       const n2 = code % 10;
       const nums = [n1, n2].concat(id.slice(1).split('').map(ch => parseInt(ch, 10)));
-
       const weights = [1,9,8,7,6,5,4,3,2,1,1];
       const sum = nums.reduce((acc, n, i) => acc + n * weights[i], 0);
       return sum % 10 === 0;
     }
 
+    // 檢查身分證是否跟性別對應
+    function isIdGenderMatched(id, gender) {
+      if (!id || !gender) return true; // 性別還沒選就先不擋
+      const secondDigit = id.trim().toUpperCase()[1];
+      if (gender === '男') return secondDigit === '1';
+      if (gender === '女') return secondDigit === '2';
+      // 性別選「其他」就不檢查第二碼
+      return true;
+    }
+
     // 即時更新身分證提示
     function updateIdHint() {
       const value = idInput.value.trim().toUpperCase();
+      const gender = genderSelect.value;
 
       if (!value) {
-        idHint.textContent = '請輸入身分證字號（首字大寫英文字母，第二碼 1 或 2）。';
+        idHint.textContent = '請輸入身分證字號（首字大寫英文字母，第二碼 1 或 2，並與性別欄位一致）。';
         idHint.className = 'mt-1 text-xs text-slate-400';
         idInput.classList.remove('ring-1', 'ring-red-500', 'ring-emerald-500');
         return;
       }
 
-      if (isValidTWId(value)) {
-        idHint.textContent = '✅ 身分證字號格式正確。';
-        idHint.className = 'mt-1 text-xs text-emerald-400';
-        idInput.classList.add('ring-1', 'ring-emerald-500');
-        idInput.classList.remove('ring-red-500');
-      } else {
-        idHint.textContent = '❗ 似乎有錯，請再次確認英文字母、性別碼與數字。';
+      if (!/^[A-Z][12]\d{8}$/.test(value)) {
+        idHint.textContent = '❗ 格式錯誤，請確認首字為英文字母、第二碼為 1 或 2，後面為 8 碼數字。';
         idHint.className = 'mt-1 text-xs text-rose-400';
         idInput.classList.add('ring-1', 'ring-red-500');
         idInput.classList.remove('ring-emerald-500');
+        return;
       }
+
+      if (!isIdGenderMatched(value, gender)) {
+        idHint.textContent = '❗ 身分證第二碼與性別欄位不一致，請確認是否選錯性別或身分證。';
+        idHint.className = 'mt-1 text-xs text-rose-400';
+        idInput.classList.add('ring-1', 'ring-red-500');
+        idInput.classList.remove('ring-emerald-500');
+        return;
+      }
+
+      if (!isValidTWId(value)) {
+        idHint.textContent = '❗ 檢查碼不正確，請確認每一碼是否輸入正確。';
+        idHint.className = 'mt-1 text-xs text-rose-400';
+        idInput.classList.add('ring-1', 'ring-red-500');
+        idInput.classList.remove('ring-emerald-500');
+        return;
+      }
+
+      idHint.textContent = '✅ 身分證字號格式與性別皆正確。';
+      idHint.className = 'mt-1 text-xs text-emerald-400';
+      idInput.classList.add('ring-1', 'ring-emerald-500');
+      idInput.classList.remove('ring-red-500');
     }
 
     idInput.addEventListener('input', () => {
       idInput.value = idInput.value.toUpperCase();
       updateIdHint();
     });
-    updateIdHint(); // 初始化一次
+    genderSelect.addEventListener('change', updateIdHint);
+    updateIdHint();
 
-    // 手機 10 碼，必須 09 開頭
+    // 手機 10 碼，09 開頭
     function isValidPhone(phone) {
       return /^09\d{8}$/.test(phone.trim());
     }
 
-    // 表單送出
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      // 至少要選一個梯次
       if (!sessionCheckboxes.some(cb => cb.checked)) {
         alert('請至少選擇一個報名梯次。');
         return;
       }
 
-      // 同意條款
       if (!agree.checked) {
         alert('請先勾選「我已閱讀並同意相關條款」再送出報名。');
         return;
       }
 
-      // 生日組合與檢查
       const y = birthdayYear.value;
       const m = birthdayMonth.value;
       const d = birthdayDay.value;
@@ -491,19 +512,25 @@
       }
       birthdayHidden.value = `${y}/${String(m).padStart(2,'0')}/${String(d).padStart(2,'0')}`;
 
-      // 身分證檢查（再防呆一次）
-      if (!isValidTWId(idInput.value)) {
-        alert('身分證字號格式或檢查碼不正確，請再次確認。');
+      const idVal = idInput.value.trim().toUpperCase();
+      const gender = genderSelect.value;
+
+      if (!isValidTWId(idVal) || !isIdGenderMatched(idVal, gender)) {
+        alert('身分證字號與性別不符或檢查碼錯誤，請再次確認。');
+        updateIdHint();
         return;
       }
 
-      // 手機檢查
       if (!isValidPhone(phoneInput.value)) {
-        alert('手機號碼需為 09 開頭的 10 位數字（例如：0912345678）。');
+        alert('學員手機號碼需為 09 開頭的 10 位數字（例如：0912345678）。');
         return;
       }
 
-      // 顯示送出中
+      if (!isValidPhone(emergencyPhoneInput.value)) {
+        alert('緊急聯絡人手機需為 09 開頭的 10 位數字（例如：0912345678）。');
+        return;
+      }
+
       submitBtn.disabled = true;
       loadingText.classList.remove('hidden');
 
@@ -515,10 +542,11 @@
           mode: 'no-cors'
         });
 
-        // 成功：清空 & 顯示成功畫面
         form.reset();
         sessionCheckboxes.forEach(cb => (cb.checked = false));
         updateTotalPrice();
+        updateIdHint();
+
         successView.classList.remove('hidden');
         form.classList.add('hidden');
 
@@ -531,7 +559,6 @@
       }
     });
 
-    // 填寫下一位
     nextBtn.addEventListener('click', () => {
       successView.classList.add('hidden');
       form.classList.remove('hidden');

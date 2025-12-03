@@ -57,6 +57,24 @@ function App() {
         </div>
       </header>
 
+
+
+      {/* Main Sessions Content */}
+      <section id="sessions" className="py-16">
+        <div className="container mx-auto px-4 max-w-5xl mt-[-40px]">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+              精彩主題梯次
+            </h2>
+            <div className="w-24 h-1.5 bg-indigo-600 mx-auto rounded-full" />
+            <p className="mt-4 text-gray-600">點選「查看課表」了解每日詳細安排</p>
+          </div>
+
+          {CAMP_SESSIONS.map((session) => (
+            <CampCard key={session.id} session={session} onRegister={() => {}} />
+          ))}
+        </div>
+      </section>
       {/* 點石優惠區塊 – 接在 wave 底下，用一點 -mt 讓過渡比較順 */}
       <section className="-mt-1ˊ pb-16 pt-4 bg-indigo-50">
         <div className="container mx-auto px-4 max-w-5xl">
@@ -121,24 +139,6 @@ function App() {
           </p>
         </div>
       </section>
-
-      {/* Main Sessions Content */}
-      <section id="sessions" className="py-16">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-              精彩主題梯次
-            </h2>
-            <div className="w-24 h-1.5 bg-indigo-600 mx-auto rounded-full" />
-            <p className="mt-4 text-gray-600">點選「查看課表」了解每日詳細安排</p>
-          </div>
-
-          {CAMP_SESSIONS.map((session) => (
-            <CampCard key={session.id} session={session} onRegister={() => {}} />
-          ))}
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-12">
         <div className="container mx-auto px-4 text-center">

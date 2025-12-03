@@ -1,4 +1,7 @@
 import { CampSession } from './types';
+// ⭐ 把圖片當模組匯入
+import img1 from './1.jpg';
+import img2 from './2.jpg';
 
 export const CAMP_SESSIONS: CampSession[] = [
   {
@@ -41,7 +44,7 @@ export const CAMP_SESSIONS: CampSession[] = [
       '莎翁戲劇課'
     ],
     colorTheme: 'sky',
-    image: 'https://picsum.photos/800/500?random=20',
+    image: img1,
     schedule: [
        { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '戶外教學 \n 六福村 \n(包車前往)' },
       { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '六福村主題樂園' },
@@ -66,7 +69,7 @@ export const CAMP_SESSIONS: CampSession[] = [
       '週五六福村歡樂結業'
     ],
     colorTheme: 'emerald',
-    image: 'https://picsum.photos/800/500?random=30',
+    image: img2,
     schedule: [
        { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '台北科博館\n或兒童新樂園' },
       { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '六福村主題樂園' },
@@ -83,7 +86,7 @@ export const CAMP_SESSIONS: CampSession[] = [
 
 export const GENERAL_INFO = {
   time: '每日 09:30 - 16:00\n (09:00 開始 Drop-off, 16:00-16:30 Pick-up)',
-  location: '點石書屋 ',
+  location: '慈惠三街 106 號 3 樓',
   address: '請洽詢點石書屋', 
   discounts: '第一梯次 $9,200 | 第二、三梯次 $8,350',
 };
