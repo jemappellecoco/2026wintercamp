@@ -15,7 +15,7 @@ function App() {
 
         <div className="container mx-auto px-4 relative z-10 text-center">
           <span className="inline-block px-4 py-1.5 bg-yellow-400 text-yellow-900 font-bold rounded-full mb-6 text-sm tracking-wide shadow-lg animate-bounce">
-            2025 冬令營現正熱烈報名中 🔥
+            2026 冬令營現正熱烈報名中 🔥
           </span>
           <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-lg">
             點石書屋<br className="md:hidden" />・雙語冬令營
@@ -152,7 +152,7 @@ function App() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-sm">
-            &copy; 2025 點石書屋. All Rights Reserved.
+            &copy; 2026 點石書屋. All Rights Reserved.
           </div>
         </div>
       </footer>
