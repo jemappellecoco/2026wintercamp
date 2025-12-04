@@ -71,7 +71,7 @@ export const CAMP_SESSIONS: CampSession[] = [
     colorTheme: 'emerald',
     image: img2,
     schedule: [
-       { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '台北科博館\n或兒童新樂園' },
+       { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '台灣博物館' },
       { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '六福村主題樂園' },
       { time: '10:00-10:50', mon: '金字塔解謎', tue: '奧運的起源\n希臘奧林匹克運動會', wed: '輝煌的羅馬帝國', thu: '世界最古老的文明\n兩河古文明', fri: '戶外教學' },
       { time: '11:00~11:50', mon: '認識輝煌\n古埃及文明', tue: '希臘哲學與數學', wed: '帝國的文明與藝術', thu: '古人的智慧\n曆法制度', fri: '藝術探索' },
