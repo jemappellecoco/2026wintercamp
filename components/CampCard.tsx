@@ -94,7 +94,7 @@ const CampCard: React.FC<CampCardProps> = ({ session, onRegister }) => {
               </button>
 
               <button
-                onClick={() => { window.location.href = '/2025wintercamp/register.html'; }}
+                onClick={() => { window.location.href = '/2026wintercamp/register.html'; }}
                 className={`flex-1 sm:flex-none px-6 py-3 rounded-lg text-white font-bold shadow-md transform active:scale-95 transition-all ${themeClasses.btn}`}
               >
                 立即報名

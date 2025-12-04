@@ -27,7 +27,7 @@ function App() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button
               onClick={() => {
-                window.location.href = '/2025wintercamp/register.html';
+                window.location.href = '/2026wintercamp/register.html';
               }}
               className="px-8 py-4 bg-white text-indigo-900 font-bold rounded-full shadow-xl hover:bg-gray-100 transition-all transform hover:-translate-y-1"
             >

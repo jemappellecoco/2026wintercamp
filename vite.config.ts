@@ -4,8 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { URL } from 'node:url';
 
 export default defineConfig({
-  // GitHub Pages 路徑： https://jemappellecoco.github.io/2025wintercamp/
-  base: '/2025wintercamp/',
+  // GitHub Pages 路徑： https://jemappellecoco.github.io/2026wintercamp/
+  base: '/2026wintercamp/',
 
   server: {
     port: 3000,
