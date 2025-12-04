@@ -46,7 +46,7 @@ export const CAMP_SESSIONS: CampSession[] = [
     colorTheme: 'sky',
     image: img1,
     schedule: [
-       { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '戶外教學 \n 六福村 \n(包車前往)' },
+       { time: '09:00-09:30', mon: '接送時間', tue: '接送時間', wed: '接送時間', thu: '接送時間', fri: '青埔兒童美術館' },
       { time: '09:30-10:00', mon: '規則講解', tue: '團體遊戲', wed: '團體遊戲', thu: '團體遊戲', fri: '六福村主題樂園' },
       { time: '10:00-10:50', mon: '旅遊英文\n報到登機', tue: '旅遊英文\n安全檢查過海關', wed: '旅遊英文\n機上注意事項', thu: '旅遊英文\n免稅商店購物', fri: '戶外教學' },
       { time: '11:00~11:50', mon: '探索歐洲\n熱情西班牙', tue: '探索歐洲\n浪漫法蘭西', wed: '探索歐洲\n務實德意志', thu: '探索歐洲\n古典英格蘭', fri: '藝術探索' },
